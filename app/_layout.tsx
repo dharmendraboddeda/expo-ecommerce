@@ -5,34 +5,44 @@ import {
   MD3LightTheme,
   adaptNavigationTheme,
 } from "react-native-paper";
-import { useMaterial3Theme } from "@pchmn/expo-material3-theme";
 import { useColorScheme } from "react-native";
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
+} from "@react-navigation/native";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const { theme } = useMaterial3Theme();
 
-  const navigationTheme = adaptNavigationTheme({
-    reactNavigationDark: DefaultTheme,
-    reactNavigationLight: DefaultTheme,
+  const { LightTheme, DarkTheme } = adaptNavigationTheme({
+    reactNavigationLight: NavigationDefaultTheme,
+    reactNavigationDark: NavigationDarkTheme,
   });
 
-  const paperTheme =
-    colorScheme === "dark"
-      ? { ...MD3DarkTheme, colors: theme.dark }
-      : { ...MD3LightTheme, colors: theme.light };
+  const CombinedDefaultTheme = {
+    ...MD3LightTheme,
+    ...LightTheme,
+    colors: {
+      ...MD3LightTheme.colors,
+      ...LightTheme.colors,
+    },
+  };
+  const CombinedDarkTheme = {
+    ...MD3DarkTheme,
+    ...DarkTheme,
+    colors: {
+      ...MD3DarkTheme.colors,
+      ...DarkTheme.colors,
+    },
+  };
+
+  const theme =
+    colorScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme;
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <NavigationContainer
-        theme={
-          colorScheme === "dark"
-            ? navigationTheme.DarkTheme
-            : navigationTheme.LightTheme
-        }
-        independent={true}
-      >
+    <PaperProvider theme={theme}>
+      <NavigationContainer theme={theme} independent={true}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" />
         </Stack>
