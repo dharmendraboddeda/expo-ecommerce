@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Text, useTheme } from "react-native-paper";
 import { View } from "react-native";
 import { Banner } from "@/components/Banner";
-import { createMaterialBottomTabNavigator } from "react-native-paper/lib/typescript/react-navigation";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 export default function MainScreen() {
   const theme = useTheme();
@@ -10,7 +10,7 @@ export default function MainScreen() {
 
   return (
     <View>
-      <View style={{ height: 500 }}>
+      <View style={{ height: 538 }}>
         <Banner />
       </View>
     </View>

@@ -21,16 +21,17 @@ export const Banner = ({ imageUri }: IBanner) => {
           position: "absolute",
           bottom: 0,
           width: "100%",
-          gap: 16,
-          padding: 16,
+          gap: 10,
+          padding: 15,
           height: "auto",
+          paddingBottom: 34,
         }}
       >
         <Headline
           style={{
             fontWeight: "bold",
-            fontSize: 58,
-            lineHeight: 60,
+            fontSize: 48,
+            lineHeight: 48,
             color: "#ffffff",
           }}
         >
@@ -39,7 +40,7 @@ export const Banner = ({ imageUri }: IBanner) => {
         <Headline
           style={{
             fontWeight: "bold",
-            fontSize: 58,
+            fontSize: 48,
             lineHeight: 60,
             color: "#ffffff",
           }}
@@ -48,7 +49,12 @@ export const Banner = ({ imageUri }: IBanner) => {
         </Headline>
         <Button
           theme={{ colors: { primary: "#ffffff" } }}
-          style={{ backgroundColor: "red", width: 180, paddingHorizontal: 10 }}
+          style={{
+            backgroundColor: "#DB3022",
+            width: 160,
+            paddingHorizontal: 10,
+            height: 37,
+          }}
         >
           Check
         </Button>
