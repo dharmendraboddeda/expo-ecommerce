@@ -11,7 +11,6 @@ import {
   DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
-import TabsLayout from "./(tabs)/_layout";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

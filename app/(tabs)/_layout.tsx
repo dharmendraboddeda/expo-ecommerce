@@ -1,86 +1,90 @@
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Stack } from "expo-router";
-import { Text, useTheme } from "react-native-paper";
+import { useTheme, Text } from "react-native-paper";
 import MainScreen from ".";
 import SettingsScreen from "./profile";
-import { Tabs } from "expo-router";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FavoriteScreen from "./favorite";
 import BagScreen from "./bag";
 import CartScreen from "./cart";
+import { View } from "react-native";
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function TabsLayout() {
   const theme = useTheme();
 
   return (
-    <Tab.Navigator barStyle={{ height: 83 }}>
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={({ route }) => ({
+        tabBarStyle: {
+          height: 83,
+          backgroundColor: theme.colors.surface,
+          borderTopRightRadius: 20,
+          borderTopLeftRadius: 20,
+          borderTopWidth: 0,
+        },
+        tabBarIcon: ({ focused }) => {
+          let iconName;
+          if (route.name === "Home")
+            iconName = focused ? "home" : "home-outline";
+          else if (route.name === "Cart")
+            iconName = focused ? "cart" : "cart-outline";
+          else if (route.name === "Bag")
+            iconName = focused ? "shopping" : "shopping-outline";
+          else if (route.name === "Favorite")
+            iconName = focused ? "heart" : "heart-outline";
+          else if (route.name === "Profile")
+            iconName = focused ? "account" : "account-outline";
+
+          let label;
+          if (route.name === "Home") label = "Home";
+          else if (route.name === "Cart") label = "Cart";
+          else if (route.name === "Bag") label = "Bag";
+          else if (route.name === "Favorite") label = "Favorite";
+          else if (route.name === "Profile") label = "Profile";
+
+          return (
+            <View style={{ alignItems: "center" }}>
+              <MaterialCommunityIcons
+                name={iconName}
+                size={30}
+                color={focused ? "#DB3022" : "#9B9B9B"}
+              />
+              <Text style={{ color: focused ? "#DB3022" : "#9B9B9B" }}>
+                {label}
+              </Text>
+            </View>
+          );
+        },
+
+        tabBarShowLabel: false,
+      })}
+    >
       <Tab.Screen
-        name="home"
+        options={{ headerShown: false }}
+        name="Home"
         component={MainScreen}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <MaterialCommunityIcons
-              name={focused ? "home" : "home-outline"}
-              size={30}
-              color={focused ? "#DB3022" : "#9B9B9B"}
-            />
-          ),
-        }}
       />
       <Tab.Screen
-        name="cart"
+        options={{ headerShown: false }}
+        name="Cart"
         component={CartScreen}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <MaterialCommunityIcons
-              name={focused ? "cart" : "cart-outline"}
-              size={30}
-              color={focused ? "#DB3022" : "#9B9B9B"}
-            />
-          ),
-        }}
       />
       <Tab.Screen
-        name="bag"
+        options={{ headerShown: false }}
+        name="Bag"
         component={BagScreen}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <MaterialCommunityIcons
-              name={focused ? "shopping" : "shopping-outline"}
-              size={30}
-              color={focused ? "#DB3022" : "#9B9B9B"}
-            />
-          ),
-        }}
       />
       <Tab.Screen
-        name="favorite"
+        options={{ headerShown: false }}
+        name="Favorite"
         component={FavoriteScreen}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <MaterialCommunityIcons
-              name={focused ? "heart" : "heart-outline"}
-              size={30}
-              color={focused ? "#DB3022" : "#9B9B9B"}
-            />
-          ),
-        }}
       />
       <Tab.Screen
-        name="profile"
+        options={{ headerShown: false }}
+        name="Profile"
         component={SettingsScreen}
-        options={{
-          tabBarIcon: ({ focused, color }) => (
-            <MaterialCommunityIcons
-              name={focused ? "account" : "account-outline"}
-              size={30}
-              color={focused ? "#DB3022" : "#9B9B9B"}
-            />
-          ),
-        }}
       />
     </Tab.Navigator>
   );
