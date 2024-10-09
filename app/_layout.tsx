@@ -11,6 +11,7 @@ import {
   DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
+import TabsLayout from "./(tabs)/_layout";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -44,7 +45,7 @@ export default function RootLayout() {
     <PaperProvider theme={theme}>
       <NavigationContainer theme={theme} independent={true}>
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
       </NavigationContainer>
     </PaperProvider>
